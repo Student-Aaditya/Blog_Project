@@ -1,0 +1,154 @@
+<% layout("/INCLUDE/boilerplate")%>
+    <style>
+        .delete {
+            text-decoration: underline;
+            background-color: honeydew;
+        }
+
+        .card {
+            margin: 5rem 2rem 0 4.5rem;
+        }
+
+        .card-body {
+            margin: 1rem;
+        }
+
+        .row {
+            display: flex;
+            margin: 0 0 3rem 0;
+        }
+
+        .divs {
+            display: flex;
+            margin: 1rem 0 0 2rem;
+        }
+
+        #filters-tag {
+            display: flex;
+            margin: 0 0 0 5rem;
+
+        }
+
+        #filters {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 1.5rem 0 0 7rem;
+            font-size: 1.5rem;
+        }
+
+        #filters i {
+            color: black;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+    <div id="filters-tag">
+        <div id="filters">
+            <div class="filter-gen">
+                <a href="/gen">
+                    <i class="fa-solid fa-book"></i>
+                </a>
+                <span>General</span>
+                
+                    <div class="create">
+                        <a href="/gen/new">
+                            <button>CREATE</button>
+                        </a>
+    
+                    </div>
+                    
+            </div>
+
+        </div>
+        <div id="filters">
+            <div class="filter-tech">
+                <a href="/tech">
+                    <i class="fa-solid fa-globe"></i>
+                </a>
+                <span>Tech</span>
+                <%if(user && user._id.equals('6713efbe4df36970adfd49cc')){%>
+                    <div class="create">
+                        <a href="/tech/new">
+                            <button>CREATE</button>
+                        </a>
+    
+                    </div>
+                    <%}%>
+            </div>
+
+        </div>
+        <div id="filters">
+            <div class="filter-mot">
+                <a href="/motive">
+                    <i class="fa-solid fa-sun"></i>
+                </a>
+                <span>Motivation</span>
+            
+                    <div class="create">
+                        <a href="/motive/new">
+                            <button>CREATE</button>
+                        </a>
+    
+                    </div>
+                    
+            </div>
+        </div>
+        <div id="filters">
+            <div class="filter-nat">
+                <a href="/nat">
+                    <i class="fa-solid fa-tree"></i>
+                </a>
+                <span>Nature</span>
+                
+                    <div class="create">
+                        <a href="/nat/new">
+                            <button>CREATE</button>
+                        </a>
+    
+                    </div>
+                
+            </div>
+        </div>
+        <div id="filters">
+            <div class="filter-cric">
+                <a href="/cric">
+                    <i class="fa-solid fa-baseball-bat-ball"></i>
+                </a>
+                <span>Cricket</span>
+                
+                <div class="create">
+                    <a href="/cric/new">
+                        <button>CREATE</button>
+                    </a>
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="row ">
+
+        <%for(let b of Blog){%>
+            <div class="card" style="width: 20rem; height: 28rem;  ">
+                <img src="<%=b.Image.url%>" class="card-img-top " alt="network issue"
+                    style="width: 15rem; height: 13rem;">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%=b.Title%>
+                    </h5>
+                    <p class="card-text">
+                        <%=b.Content1%>
+                    </p>
+
+                    <a href="/blog/<%=b._id%>" class="btn btn-primary">READ</a>
+                </div>
+                <%if(user && user._id.equals('6713efbe4df36970adfd49cc')){%>
+                    <form method="POST" action="/blog/<%=b._id%>?_method=Delete">
+                        <button>Delete</button>
+                    </form>
+                    <%}%>
+            </div>
+            <%}%>
+    </div>
